@@ -1,0 +1,11 @@
+.svg-container {
+  width: 45%;
+  min-width: 150px;
+ 
+}
+
+.svg-container-game {
+  width: 45%;
+  max-width: 100px;
+ 
+}
