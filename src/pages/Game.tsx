@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation} from "react-router-dom"
-import { icons, numbers } from "../characters";
+import { icons, numbers, shuffle } from "../utils";
 import Circle from "../components/Circle";
 
 
@@ -14,18 +14,51 @@ export default function Game() {
     const gridSize : string = location.state.gridSize
 
     // Setting the characters that will be used
-    const [characters, setCharacters] = React.useState<{character : string | number, clicked : boolean}[]>()
+    const [characters, setCharacters] = React.useState<{character : string | number, clicked : boolean}[]>([{character: "", clicked: true}])
 
     React.useEffect(() => {
         if(theme === 'icons' && gridSize === '4x4') {
-            setCharacters(icons.slice(5))
-        } else {
-            setCharacters(numbers)
+            const newArr = shuffle(icons).slice(10)
+            console.log(newArr)
+            const secondArr = newArr
+            setCharacters(shuffle(newArr.concat(secondArr)))
+        } else if (theme === 'icons' && gridSize === '6x6') {
+            const newArr = shuffle(icons)
+            const secondArr = newArr
+            setCharacters(newArr.concat(secondArr))
+        } else if (theme === 'numbers' && gridSize === '4x4') {
+            const newArr = shuffle(numbers).slice(10)
+            console.log(newArr)
+            const secondArr = newArr
+            setCharacters(shuffle(newArr.concat(secondArr)))
+        } else if (theme === 'numbers' && gridSize === '6x6') {
+            const newArr = shuffle(numbers)
+            const secondArr = newArr
+            setCharacters(newArr.concat(secondArr))
         }
     }, [])
 
 
-    return(
+    // !!! GAME LOGIC !!!
+
+    // General Logic
+    function changeClick(index : number) {
+        setCharacters(prev => {
+            const newChars = [...prev]
+            newChars[index] = {...newChars[index], clicked: true}
+            return newChars
+        })
+    }
+
+    React.useEffect(() => {
+        console.log(characters)
+    }, [characters])
+    
+    // Current Player logic (if there are more than one player)
+    const [currentPlayer, setCurrentPlayer] = React.useState< 1 | 2 | 3 | 4 >(1)
+
+
+    return (
 
         <main className="bg-white3 p-4 h-screen">
             <header className="flex justify-between items-center">
@@ -35,8 +68,8 @@ export default function Game() {
                 <button className="bg-darkYellow hover:bg-darkYellowHover text-white px-4 py-1 rounded-xl font-bold">Menu</button>
             </header>
 
-            <section className={`grid ${gridSize === "4x4" ? "grid-cols-4" : gridSize === "6x6" ? "grid-cols-6" : ""} `}>
-                {characters?.map((char) => <Circle character={char.character} clicked={char.clicked}/> )}
+            <section className={`grid ${gridSize === "4x4" ? "grid-cols-4" : gridSize === "6x6" ? "grid-cols-6" : ""} gap-4 mt-12`}>
+                {characters?.map((char, index) => <Circle character={char.character} clicked={char.clicked} theme={theme} changeClick={changeClick} index={index}/> )}
             </section>
         </main>
 
