@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom"
 
-export default function Menu() {
+export default function Settings() {
 
-    const [theme, setTheme] = React.useState<'numbers' | 'icons'>('numbers')
-    const [players, setPlayers] = React.useState<1 | 2 | 3 | 4>(1)
-    const [gridSize, setGridSize] = React.useState<'4x4' | '6x6'>('4x4')
+    const [theme, setTheme] = React.useState< 'numbers' | 'icons' >('numbers')
+    const [players, setPlayers] = React.useState< 1 | 2 | 3 | 4 >(1)
+    const [gridSize, setGridSize] = React.useState< '4x4' | '6x6' >('4x4')
 
     return(
         <main className="bg-darkBlack h-screen font-athl text-white flex flex-col justify-center items-center text-center">
@@ -17,26 +17,26 @@ export default function Menu() {
             <section className="bg-white3 mt-6 py-6 px-4 rounded-xl flex flex-col " aria-label="This section has the settings for the game.">
                <h1 className="text-lightBlue self-start mb-1 font-bold">Select Theme</h1>
                <div className="flex justify-between mb-4" aria-label="Options to select the theme of the game.">
-                    <button className={`${theme === 'numbers' ? 'bg-darkGray' : 'bg-lightGray'} ${theme === 'numbers' ? '' : 'hover:bg-lightBlue'} w-full mr-1 px-6 py-2  rounded-3xl`} onClick={() => setTheme('numbers')}>Numbers</button>
-                    <button className={`${theme === 'icons' ? 'bg-darkGray' : 'bg-lightGray'} ${theme === 'icons' ? '' : 'hover:bg-lightBlue'}  w-full px-6 py-2  rounded-3xl`} onClick={() => setTheme('icons')}>Icons</button>
+                    <button className={`${theme === 'numbers' ? 'bg-darkGray' : 'bg-lightGray'} ${theme === 'numbers' ? '' : 'hover:bg-lightBlue2'} w-full mr-1 px-6 py-2  rounded-3xl`} onClick={() => setTheme('numbers')}>Numbers</button>
+                    <button className={`${theme === 'icons' ? 'bg-darkGray' : 'bg-lightGray'} ${theme === 'icons' ? '' : 'hover:bg-lightBlue2'}  w-full px-6 py-2  rounded-3xl`} onClick={() => setTheme('icons')}>Icons</button>
                </div>
 
                <h1 className="text-lightBlue self-start font-bold mb-1">Number of Players</h1>
                <div className="flex justify-between mb-4" aria-label="Options to select number of players in the game.">
-                    <button className={`${players === 1 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 1 ? '' : 'hover:bg-lightBlue'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setPlayers(1)}>1</button>
-                    <button className={`${players === 2 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 2 ? '' : 'hover:bg-lightBlue'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setPlayers(2)}>2</button>
-                    <button className={`${players === 3 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 3 ? '' : 'hover:bg-lightBlue'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setPlayers(3)}>3</button>
-                    <button className={`${players === 4 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 4 ? '' : 'hover:bg-lightBlue'} w-full px-6 py-2 rounded-3xl`} onClick={() => setPlayers(4)}>4</button>
+                    <button className={`${players === 1 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 1 ? '' : 'hover:bg-lightBlue2'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setPlayers(1)}>1</button>
+                    <button className={`${players === 2 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 2 ? '' : 'hover:bg-lightBlue2'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setPlayers(2)}>2</button>
+                    <button className={`${players === 3 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 3 ? '' : 'hover:bg-lightBlue2'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setPlayers(3)}>3</button>
+                    <button className={`${players === 4 ? 'bg-darkGray' : 'bg-lightGray'} ${players === 4 ? '' : 'hover:bg-lightBlue2'} w-full px-6 py-2 rounded-3xl`} onClick={() => setPlayers(4)}>4</button>
                </div>
 
                <h1 className="text-lightBlue self-start font-bold mb-1">Grid Size</h1>
                <div className="flex justify-between mb-4" aria-label="Options to select the grid size of the game.">
-                    <button className={`${gridSize === '4x4' ? 'bg-darkGray' : 'bg-lightGray'} ${gridSize === '4x4' ? '' : 'hover:bg-lightBlue'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setGridSize('4x4')}>4x4</button>
-                    <button className={`${gridSize === '6x6' ? 'bg-darkGray' : 'bg-lightGray'} ${gridSize === '6x6' ? '' : 'hover:bg-lightBlue'} w-full px-6 py-2 rounded-3xl`} onClick={() => setGridSize('6x6')}>6x6</button>
+                    <button className={`${gridSize === '4x4' ? 'bg-darkGray' : 'bg-lightGray'} ${gridSize === '4x4' ? '' : 'hover:bg-lightBlue2'} w-full mr-1 px-6 py-2 rounded-3xl`} onClick={() => setGridSize('4x4')}>4x4</button>
+                    <button className={`${gridSize === '6x6' ? 'bg-darkGray' : 'bg-lightGray'} ${gridSize === '6x6' ? '' : 'hover:bg-lightBlue2'} w-full px-6 py-2 rounded-3xl`} onClick={() => setGridSize('6x6')}>6x6</button>
                </div>
 
                 <NavLink to="/game" state={{theme: theme, players: players, gridSize: gridSize}}>
-                    <button className="bg-darkYellow mt-2 px-6 py-2 rounded-3xl font-bold hover:bg-yellow-700 w-full">Start Game</button>
+                    <button className="bg-darkYellow mt-2 px-6 py-2 rounded-3xl font-bold hover:bg-darkYellowHover w-full">Start Game</button>
                 </NavLink>
 
             </section>

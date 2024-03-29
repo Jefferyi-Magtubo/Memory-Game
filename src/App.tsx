@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom' 
 
 import './App.css'
-import Menu from './pages/Menu'
 import Game from './pages/Game'
+import Settings from './pages/Settings'
 
 function App() {
   
@@ -12,7 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Menu />}/>
+          <Route path='/' element={<Settings />}/>
           <Route path='/game' element={<Game />}/>
         </Routes>
       </BrowserRouter>

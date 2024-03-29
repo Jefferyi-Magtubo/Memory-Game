@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         'darkYellow' : '#FDA214',
+        'darkYellowHover' : '#FFB84A',
         'lightGray' : '#BCCED9',
         'darkGray' : '#304859',
         'darkBlack' : '#152938', 
