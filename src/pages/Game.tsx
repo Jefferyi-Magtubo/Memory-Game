@@ -1,11 +1,11 @@
 import React from "react";
 import { useLocation} from "react-router-dom"
 import { icons, numbers, shuffle } from "../utils";
+import { Link } from 'react-router-dom';
 import Circle from "../components/Circle";
 import Player from "../components/Player";
 import FinalScoreLabel from "../components/FinalScoreLabel";
 import { nanoid } from 'nanoid'
-
 
 export default function Game() {
 
@@ -104,7 +104,8 @@ export default function Game() {
     
     // Current Player logic (if there are more than one player)
     const [currentPlayer, setCurrentPlayer] = React.useState< 1 | 2 | 3 | 4  >(1)
-    const [playerScores, setPlayerScores] = React.useState({
+    const [playerScores, setPlayerScores] = React.useState<{[key: number]: number;}>
+    ({
         1: 0,
         2: 0,
         3: 0,
@@ -148,6 +149,26 @@ export default function Game() {
         return winners;
     };
 
+    let finalScoreData = []
+
+    for (let i = 0; i < players; i++) {
+        const players = Object.keys(playerScores).map(key => parseInt(key))
+        const playerScores2 = Object.entries(playerScores)
+        const playerNum = players[i]
+        const playerScore = playerScores2[i][1]
+        finalScoreData.push([playerNum, playerScore])
+    }
+
+    let greatestScore = finalScoreData.sort((a, b) => b[1] - a[1])[0][1]
+
+    // End game modal
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    // Code for 1 person games
+
+
     //Testing and Debugging
     React.useEffect(() => {
         console.log(characters, correctPairs, currentSelected)
@@ -163,18 +184,19 @@ export default function Game() {
                 <button className="bg-darkYellow hover:bg-darkYellowHover text-white px-4 py-1 rounded-xl font-bold">Menu</button>
             </header>
 
-            <section className={`grid ${gridSize === "4x4" ? "grid-cols-4" : gridSize === "6x6" ? "grid-cols-6" : ""} gap-4 `}>
+            <section className={`grid ${gridSize === "4x4" ? "grid-cols-4 gap-4 " : gridSize === "6x6" ? "grid-cols-6 gap-2" : ""} `}>
                 {characters?.map((char, index) => {
                     const key = nanoid()
-                    return <Circle key={key} customKey={key} character={char.character} clicked={char.clicked} theme={theme} changeClick={changeClick} index={index} correctPairs={correctPairs} currentSelected={currentSelected}/>
+                    return <Circle key={key} customKey={key} character={char.character} clicked={char.clicked} theme={theme} changeClick={changeClick} index={index} correctPairs={correctPairs} currentSelected={currentSelected} gridSize={gridSize}/>
                 } )}
             </section>
 
             <section>
                 {players === 1 ?
-                <p>One person</p>
+                <div>
+                </div>
                 :
-                <div className="flex justify-center">
+                <div className="flex justify-center items-center">
                   {playerElements}  
                 </div>
                 }
@@ -182,10 +204,16 @@ export default function Game() {
 
             <div className={`${endOfGame ? "fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" : "hidden"} `}>
 
-                <div className="bg-white w-4/5 p-4 flex-col justify-center items-center text-center">
-                    <h1 className="text-2xl text-darkBlack font-bold mb-2">{(findWinner()).length === 1 ? `Player ${findWinner()} Wins!` : `It's a tie`}</h1>
-                    <p className="text-xs text-lightBlue font-bold mb-2">Game Over! Here are the results...</p>
-                    <FinalScoreLabel winners={findWinner()} playerScores={playerScores} />
+                <div className="bg-white w-4/5 p-6 flex-col justify-center items-center text-center rounded-lg pointer-events-auto">
+                    <h1 className="text-2xl text-darkBlack font-bold mb-2">{(findWinner()).length === 1 ? `Player ${findWinner()} Wins!` : `It's a tie!`}</h1>
+                    <p className="text-xs text-lightBlue font-bold mb-4">Game Over! Here are the results...</p>
+                    {finalScoreData.map(scoreData => {
+                        return <FinalScoreLabel player={scoreData} greatestScore={greatestScore}/>
+                    })}
+                    <div className="flex flex-col mt-4">
+                        <Link to="/" onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2">Refresh</Link>
+                        <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl font-bold">Setup New Game</Link>    
+                    </div>
                 </div>
                 
             </div>
