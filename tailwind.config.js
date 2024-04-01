@@ -15,7 +15,8 @@ export default {
         'white2' : '#F2F2F2',
         'white3' : '#FCFCFC',
         'lightBlue' : '#7191A5',
-        'lightBlue2' : '#6395DB'
+        'lightBlue2' : '#6395DB',
+        'playerCardDefault' : "#DFE7EC"
       },
       fontFamily: {
         'athl' : ["Atkinson Hyperlegible", "sans-serif"]

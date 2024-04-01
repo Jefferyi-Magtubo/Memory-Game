@@ -9,3 +9,18 @@
   max-width: 100px;
  
 }
+
+.current::before {
+  content: "ses";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  transform: translate(-50%, -100%);
+  transition: border-bottom 250ms ease;
+  transition-delay: 1000ms;
+}
