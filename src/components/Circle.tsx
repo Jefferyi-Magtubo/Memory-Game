@@ -1,5 +1,3 @@
-import React from "react"
-import { nanoid } from 'nanoid'
 
 export default function Circle({character, clicked, theme, changeClick, index, customKey, correctPairs, currentSelected, gridSize} : {character: string | number, clicked: boolean, theme : string, changeClick : Function, index: number, customKey: string, correctPairs: string[], currentSelected : {}[], gridSize : string}) {
 

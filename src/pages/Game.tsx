@@ -188,12 +188,9 @@ export default function Game() {
 
     }, [players])
 
-
-
-    //Testing and Debugging
     React.useEffect(() => {
-        console.log(seconds)
-    }, [seconds])
+        console.log(characters)
+    }, [characters])
 
     return (
 
@@ -223,8 +220,8 @@ export default function Game() {
                 {players === 1 ?
                 <div className="flex justify-center items-center md:mt-8">
                     <div className="bg-playerCardDefault flex flex-col sm:flex-row font-athl justify-center sm:justify-between items-center py-4 sm:py-8 sm:px-6 w-24 sm:w-48 mr-4 rounded-lg">
-                        <h2 className="font-bold text-lightBlue">Timer</h2>
-                        <h1 className="font-bold text-darkGray">{Math.floor(seconds/60)}:{Math.round(seconds % 60) < 10 ? "0" : ""}{Math.round(seconds % 60)}</h1>
+                        <h2 className="font-bold text-lightBlue sm:text-lg">Timer</h2>
+                        <h1 className="font-bold text-darkGray sm:text-lg">{Math.floor(seconds/60)}:{Math.round(seconds % 60) < 10 ? "0" : ""}{Math.round(seconds % 60)}</h1>
                     </div>
 
                     <div className="bg-playerCardDefault flex flex-col sm:flex-row font-athl justify-center sm:justify-between items-center py-4 sm:py-8 sm:px-6 w-24 sm:w-48 mr-4 rounded-lg">
@@ -254,19 +251,19 @@ export default function Game() {
                 </div>
 
                 <div className={`bg-white w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 p-6 flex-col justify-center items-center text-center rounded-lg pointer-events-auto  ${players === 1 ? '' : 'hidden'}`}>
-                    <h1 className="text-2xl text-darkBlack font-bold mb-2 md:text-3xl">You did it</h1>
-                    <p className="text-xs text-lightBlue font-bold mb-4 md:text-lg">Game Over! Here's how you got on...</p>
+                    <h1 className="text-2xl text-darkBlack font-bold mb-2 smh:text-3xl">You did it</h1>
+                    <p className="text-xs text-lightBlue font-bold mb-4 smh:text-lg">Game Over! Here's how you got on...</p>
                     <div className="bg-playerCardDefault flex  font-athl justify-between items-center p-4 rounded-lg">
-                        <h2 className="font-bold text-lightBlue text-xs sm:text-lg">Time Elapsed</h2>
+                        <h2 className="font-bold text-lightBlue text-xs smh:text-lg">Time Elapsed</h2>
                         <h1 className="font-bold text-darkGray text-xl">{Math.floor(seconds/60)}:{Math.round(seconds % 60) < 10 ? "0" : ""}{Math.round(seconds % 60)}</h1>
                     </div>
                     <div className="bg-playerCardDefault flex  font-athl justify-between items-center p-4 rounded-lg mt-2">
-                        <h2 className="font-bold text-lightBlue text-xs sm:text-lg">Moves</h2>
+                        <h2 className="font-bold text-lightBlue text-xs smh:text-lg">Moves</h2>
                         <h1 className="font-bold text-darkGray text-xl">{moves}</h1>
                     </div>
                     <div className="flex flex-col mt-4">
-                        <a onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 sm:text-xl">Restart</a>
-                        <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl font-bold sm:text-xl">Setup New Game</Link>    
+                        <a onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 smh:text-xl">Restart</a>
+                        <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl font-bold smh:text-xl">Setup New Game</Link>    
                     </div>
                 </div>
                 
