@@ -277,8 +277,8 @@ export default function Game() {
                     <div className="flex flex-col w-4/5 text-center bg-white py-8 px-4 rounded-lg">
                         <a onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-4 text-xl">Restart</a>
                         <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl mb-4 font-bold text-xl">Setup New Game</Link>  
-                        <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl  font-bold text-xl" 
-                        onClick={() => setMenuStatus(false)}>Resume Game</Link>  
+                        <button className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl  font-bold text-xl" 
+                        onClick={() => setMenuStatus(false)}>Resume Game</button>  
                     </div>
                 </div>
             :
