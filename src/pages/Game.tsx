@@ -14,8 +14,9 @@ export default function Game() {
 
 
     if(useLocation()) {
-        console.log('test')
+        
         location = useLocation()
+        console.log(location)
         localStorage.setItem('data', JSON.stringify(location))
     } else {
         const storedData = localStorage.getItem('data');
