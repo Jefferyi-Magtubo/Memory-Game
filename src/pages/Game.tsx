@@ -14,7 +14,7 @@ export default function Game() {
 
 
     if(useLocation()) {
-        
+        console.log('test')
         location = useLocation()
         localStorage.setItem('data', JSON.stringify(location))
     } else {
@@ -23,8 +23,10 @@ export default function Game() {
         let parsedData;
         
         if (storedData !== null) {
+            console.log('success')
             parsedData = JSON.parse(storedData);
         } else {
+            console.log('null')
             // Handle the case where the data is not found in local storage
             parsedData = null; // or any other default value you want to assign
         }
