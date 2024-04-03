@@ -214,6 +214,16 @@ export default function Game() {
         setCharacters(prev => shuffle(prev))
         setMenuStatus(false)
         setEnd(false)
+
+        if(players === 1) {
+            intervalRef.current = setInterval(() => {
+                setSeconds(prev => prev + 1)
+            }, 1000)
+        }
+    
+        return () => {
+            clearInterval(intervalRef.current!);
+        };
     }
 
     return (
