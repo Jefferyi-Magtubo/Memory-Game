@@ -8,14 +8,14 @@ function App() {
   
 
   return (
-    <>
+
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Settings />}/>
           <Route path='/game' element={<Game />}/>
         </Routes>
       </BrowserRouter>
-    </>
+
   )
 }
 
