@@ -212,6 +212,7 @@ export default function Game() {
             })
         })
         setCharacters(prev => shuffle(prev))
+        setMenuStatus(false)
     }
 
     return (
