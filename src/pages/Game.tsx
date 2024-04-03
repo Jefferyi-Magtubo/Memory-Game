@@ -10,34 +10,31 @@ import { nanoid } from 'nanoid'
 export default function Game() {
 
     // Getting the state from the settings page
-    let location 
+    let location;
 
-
-    if(useLocation()) {
-        
-        location = useLocation()
-        console.log(location)
-        localStorage.setItem('data', JSON.stringify(location))
+    if (useLocation()) {
+        location = useLocation();
+        localStorage.setItem('data', JSON.stringify(location));
     } else {
         const storedData = localStorage.getItem('data');
-
+    
         let parsedData;
-        
+    
         if (storedData !== null) {
-            console.log('success')
+            console.log('success');
             parsedData = JSON.parse(storedData);
         } else {
-            console.log('null')
-            // Handle the case where the data is not found in local storage
-            parsedData = null; // or any other default value you want to assign
+            console.log('null');
+            parsedData = null;
         }
-
-        location = parsedData ? parsedData : null
+    
+        location = parsedData ? parsedData : null;
     }
-
-    const theme : string = location.state.theme
-    const players : number = location.state.players
-    const gridSize : string = location.state.gridSize
+    
+    // Check if location and location.state exist before accessing nested properties
+    const theme: string = location && location.state ? location.state.theme : '';
+    const players: number = location && location.state ? location.state.players : 0;
+    const gridSize: string = location && location.state ? location.state.gridSize : '';
 
     // Setting the characters that will be used and how many players there will be
     const [characters, setCharacters] = React.useState<{character : string | number, clicked : boolean}[]>([{character: "", clicked: true}])
