@@ -10,31 +10,11 @@ import { nanoid } from 'nanoid'
 export default function Game() {
 
     // Getting the state from the settings page
-    let location;
+    const location = useLocation()
 
-    if (useLocation()) {
-        location = useLocation();
-        localStorage.setItem('data', JSON.stringify(location));
-    } else {
-        const storedData = localStorage.getItem('data');
-    
-        let parsedData;
-    
-        if (storedData !== null) {
-            console.log('success');
-            parsedData = JSON.parse(storedData);
-        } else {
-            console.log('null');
-            parsedData = null;
-        }
-    
-        location = parsedData ? parsedData : null;
-    }
-    
-    // Check if location and location.state exist before accessing nested properties
-    const theme: string = location && location.state ? location.state.theme : '';
-    const players: number = location && location.state ? location.state.players : 0;
-    const gridSize: string = location && location.state ? location.state.gridSize : '';
+    const theme : string = location.state.theme
+    const players : number = location.state.players
+    const gridSize : string = location.state.gridSize
 
     // Setting the characters that will be used and how many players there will be
     const [characters, setCharacters] = React.useState<{character : string | number, clicked : boolean}[]>([{character: "", clicked: true}])
@@ -141,7 +121,7 @@ export default function Game() {
     let playerElements = []
 
     for (let i = 1; i <= players; i++) {
-        playerElements.push(<Player player={i} score={playerScores} currentPlayer={currentPlayer} />);
+        playerElements.push(<Player key={nanoid()} player={i} score={playerScores} currentPlayer={currentPlayer} />);
     }
 
     // Testing for end conditions and determining the winner
@@ -208,9 +188,31 @@ export default function Game() {
 
     }, [players])
 
-    React.useEffect(() => {
-        console.log(characters)
-    }, [characters])
+    // Restarting game
+
+    function restartGame() {
+        setSeconds(0)
+        setCurrentPlayer(1)
+        setMoves(0)
+        setCorrectPairs([])
+        setPlayerScores({
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0
+        })
+        setSelected([])
+        setCharacters(prev => {
+            return prev.map(oldItem => {
+                if(oldItem.clicked === true) {
+                    return {...oldItem, clicked: false}
+                } else {
+                    return oldItem
+                }
+            })
+        })
+        setCharacters(prev => shuffle(prev))
+    }
 
     return (
 
@@ -221,7 +223,7 @@ export default function Game() {
                 </div>
                 <button className="bg-darkYellow hover:bg-darkYellowHover font-athl text-white px-4 py-1 rounded-xl font-bold smh:text-2xl md:hidden " onClick={() => setMenuStatus(true)}>Menu</button>
                 <div className="hidden md:flex">
-                    <a onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 px-4 rounded-xl mr-2  sm:text-lg">Restart</a>
+                    <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 px-4 rounded-xl mr-2  sm:text-lg">Restart</a>
                     <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 px-4 rounded-xl font-bold sm:text-lg">Setup New Game</Link>
                 </div>
             </header>
@@ -262,10 +264,10 @@ export default function Game() {
                     <h1 className=" text-darkBlack font-bold mb-2 text-3xl">{(findWinner()).length === 1 ? `Player ${findWinner()} Wins!` : `It's a tie!`}</h1>
                     <p className=" text-lightBlue font-bold mb-4 text-lg">Game Over! Here are the results...</p>
                     {finalScoreData.map(scoreData => {
-                        return <FinalScoreLabel player={scoreData} greatestScore={greatestScore}/>
+                        return <FinalScoreLabel key={nanoid()} player={scoreData} greatestScore={greatestScore}/>
                     })}
                     <div className="flex flex-col mt-4">
-                        <a onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 sm:text-xl">Restart</a>
+                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 sm:text-xl">Restart</a>
                         <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl font-bold sm:text-xl">Setup New Game</Link>    
                     </div>
                 </div>
@@ -282,7 +284,7 @@ export default function Game() {
                         <h1 className="font-bold text-darkGray text-xl">{moves}</h1>
                     </div>
                     <div className="flex flex-col mt-4">
-                        <a onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 smh:text-xl">Restart</a>
+                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 smh:text-xl">Restart</a>
                         <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl font-bold smh:text-xl">Setup New Game</Link>    
                     </div>
                 </div>
@@ -292,7 +294,7 @@ export default function Game() {
             {menuStatus ?
                 <div className={"fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 pointer-events-auto"}>
                     <div className="flex flex-col w-4/5 text-center bg-white py-8 px-4 rounded-lg">
-                        <a onClick={() => window.location.reload()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-4 text-xl">Restart</a>
+                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-4 text-xl">Restart</a>
                         <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl mb-4 font-bold text-xl">Setup New Game</Link>  
                         <button className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl  font-bold text-xl" 
                         onClick={() => setMenuStatus(false)}>Resume Game</button>  
