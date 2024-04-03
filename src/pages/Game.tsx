@@ -215,6 +215,7 @@ export default function Game() {
         setMenuStatus(false)
         setEnd(false)
 
+        clearInterval(intervalRef.current!)
         if(players === 1) {
             intervalRef.current = setInterval(() => {
                 setSeconds(prev => prev + 1)
