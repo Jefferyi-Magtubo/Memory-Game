@@ -213,6 +213,7 @@ export default function Game() {
         })
         setCharacters(prev => shuffle(prev))
         setMenuStatus(false)
+        setEnd(false)
     }
 
     return (
@@ -224,7 +225,7 @@ export default function Game() {
                 </div>
                 <button className="bg-darkYellow hover:bg-darkYellowHover font-athl text-white px-4 py-1 rounded-xl font-bold smh:text-2xl md:hidden " onClick={() => setMenuStatus(true)}>Menu</button>
                 <div className="hidden md:flex">
-                    <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 px-4 rounded-xl mr-2  sm:text-lg">Restart</a>
+                    <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover hover:cursor-pointer  text-white3 font-bold p-2 px-4 rounded-xl mr-2  sm:text-lg">Restart</a>
                     <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 px-4 rounded-xl font-bold sm:text-lg">Setup New Game</Link>
                 </div>
             </header>
@@ -268,7 +269,7 @@ export default function Game() {
                         return <FinalScoreLabel key={nanoid()} player={scoreData} greatestScore={greatestScore}/>
                     })}
                     <div className="flex flex-col mt-4">
-                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 sm:text-xl">Restart</a>
+                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover hover:cursor-pointer  text-white3 font-bold p-2 rounded-3xl mb-2 sm:text-xl">Restart</a>
                         <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl font-bold sm:text-xl">Setup New Game</Link>    
                     </div>
                 </div>
@@ -285,7 +286,7 @@ export default function Game() {
                         <h1 className="font-bold text-darkGray text-xl">{moves}</h1>
                     </div>
                     <div className="flex flex-col mt-4">
-                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-2 smh:text-xl">Restart</a>
+                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover hover:cursor-pointer  text-white3 font-bold p-2 rounded-3xl mb-2 smh:text-xl">Restart</a>
                         <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl font-bold smh:text-xl">Setup New Game</Link>    
                     </div>
                 </div>
@@ -295,7 +296,7 @@ export default function Game() {
             {menuStatus ?
                 <div className={"fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 pointer-events-auto"}>
                     <div className="flex flex-col w-4/5 text-center bg-white py-8 px-4 rounded-lg">
-                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover  text-white3 font-bold p-2 rounded-3xl mb-4 text-xl">Restart</a>
+                        <a onClick={() => restartGame()} className="bg-darkYellow hover:bg-darkYellowHover hover:cursor-pointer  text-white3 font-bold p-2 rounded-3xl mb-4 text-xl">Restart</a>
                         <Link to="/" className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl mb-4 font-bold text-xl">Setup New Game</Link>  
                         <button className="bg-playerCardDefault linkGray hover:bg-lightBlue2 hover:text-white text-darkGray p-2 rounded-3xl  font-bold text-xl" 
                         onClick={() => setMenuStatus(false)}>Resume Game</button>  
