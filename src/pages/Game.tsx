@@ -12,15 +12,24 @@ export default function Game() {
     // Getting the state from the settings page
     let location 
 
+
     if(useLocation()) {
         
         location = useLocation()
         localStorage.setItem('data', JSON.stringify(location))
     } else {
         const storedData = localStorage.getItem('data');
+
+        let parsedData;
         
-        location = storedData ? JSON.parse(storedData) : null; 
-        console.log(location)
+        if (storedData !== null) {
+            parsedData = JSON.parse(storedData);
+        } else {
+            // Handle the case where the data is not found in local storage
+            parsedData = null; // or any other default value you want to assign
+        }
+
+        location = parsedData ? parsedData : null
     }
 
     const theme : string = location.state.theme
