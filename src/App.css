@@ -15,21 +15,29 @@
 
 
 
-.current::before {
-  content: "ses";
+.currenttriangle::before {
+  content: '';
   position: absolute;
-  top: .3em;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: #FDA214;
-  border-bottom: 20px solid transparent;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  transform: translate(-50%, -100%);
+  bottom: 100%; /* Position it above the .current element */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  border-width: 0 8px 8px; /* Define the triangle */
+  border-style: solid;
+  border-color: transparent transparent #FDA214; /* Color the triangle */
 
 }
 
 .current::after {
-  content: "Current"
+  content: "CURRENT PLAYER";
+  position: absolute;
+  top: 110%; /* Position it below the .current element */
+  left: auto;
+  right: auto;
+
+  height: 0;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  
+
+
+
 }
