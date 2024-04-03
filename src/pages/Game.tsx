@@ -13,11 +13,14 @@ export default function Game() {
     let location 
 
     if(useLocation()) {
-        localStorage.setItem('data', useLocation().toString())
+        
         location = useLocation()
+        localStorage.setItem('data', JSON.stringify(location))
     } else {
         const storedData = localStorage.getItem('data');
+        
         location = storedData ? JSON.parse(storedData) : null; 
+        console.log(location)
     }
 
     const theme : string = location.state.theme
