@@ -241,7 +241,7 @@ export default function Game() {
                 </div>
             </header>
 
-            <section className="flex justify-center items-center w-100vw sm:w-4/5 sm:mx-auto ">
+            <section className="flex justify-center items-center w-100vw sm:w-4/5 sm:mx-auto xs:mr-4 mt-5">
                 <div className={`grid ${gridSize === "4x4" ? "grid-cols-4 gap-y-4 gap-x-6    w-max" : gridSize === "6x6" ? "grid-cols-6 gap-y-3 gap-x-3  w-max" : ""} `}>
                     {characters?.map((char, index) => {
                         const key = nanoid()
