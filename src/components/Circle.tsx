@@ -10,7 +10,7 @@ export default function Circle({character, clicked, theme, changeClick, index, c
         rounded-full`}
         onClick={() => changeClick(index)}>
             {theme === 'icons' ?
-            <i className={`fa-brands fa-${character} ${correctPairs.includes(character.toString()) ? 'text-white' : ''} text-lg`}></i>
+            <i className={`fa-brands fa-${character} ${correctPairs.includes(character.toString()) ? 'text-white' : ''} text-lg md:text-2xl`}></i>
             :
             <h1 className={ `font-extrabold ${correctPairs.includes(character.toString()) ? 'text-white' : ''}`}>{character}</h1>}
         </button>
